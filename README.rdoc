@@ -214,3 +214,17 @@ Or just:
 The testing process will create a few authorizations in your GitHub
 account but will clean them up after. It will also create a Gist in
 your GitHub account but will also clean that up after.
+
+= Organizing your Gems
+
+After a while you might build a decent list of code snippets you share
+between projects and developers. While Gist is great at managing a
+single gist it isn't very good at organizing a collection of gists.
+For that I cannot recommend GistBox[http://www.gistboxapp.com] highly
+enough.
+
+= Credit & License
+
+This software was developed by Eric Anderson (http://pixelwareinc.com).
+It is public domain software and you can use however you see fit as long
+as you USE AT YOUR OWN RISK.
