@@ -1,7 +1,6 @@
 = Description
 
-gist-dep::
-  A gem-like tool for managing small reusable code snippets in a project
+gist-dep:: A gem-like tool for managing small reusable code snippets in a project
 
 Useful for small bits of functionality that are used repeatly in
 different projects and/or by different developers. Ruby monkey-patches,
