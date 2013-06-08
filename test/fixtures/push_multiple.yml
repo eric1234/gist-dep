@@ -1,0 +1,8 @@
+---
+files:
+- gist_id: '#{gist.id}'
+  filename: hello_world.rb
+  path: ./hello_world.rb
+- gist_id: '#{gist.id}'
+  filename: 1.rb
+  path: ./1.rb

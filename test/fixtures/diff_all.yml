@@ -1,0 +1,11 @@
+---
+files:
+- gist_id: '4063653'
+  filename: getHTML.coffee
+  path: ./getHTML.coffee
+- gist_id: '4667599'
+  filename: assign.worker
+  path: ./assign.worker
+- gist_id: '4667599'
+  filename: list.worker
+  path: ./list.worker

@@ -1,0 +1,196 @@
+= Description
+
+gist-dep::
+  A gem-like tool for managing small reusable code snippets in a project
+
+Useful for small bits of functionality that are used repeatly in
+different projects and/or by different developers. Ruby monkey-patches,
+Javascript polyfills, common styles, etc are great examples.
+
+Anytime you want to re-use code but the amount of code is so small it
+is silly to create a library gist-dep is your answer.
+
+= Usage
+
+== Install a New Gist
+
+When you only have one file on the gist:
+
+    %> gist-dep add 732081
+    Adding engine_mixin.rb from gist 732081
+
+Saving the gist to a specific path:
+
+    %> gist-dep add --path app/assets/javascripts 795566
+    Adding placeholder.coffee from gist 795566 to app/assets/javascripts
+
+Specifying a specific file in gist having more than one file:
+
+    %> gist-dep add --path app/models 519630/db_config.rb
+
+If a gist has more than one non-doc file and you don't specify which
+file it will prompt you to find out which one you want.
+
+Renaming a file as you install it:
+
+    %> gist-dep add --path db/migrations/20130509000000_add_db_config.rb 519630/migration.rb
+
+== Updating a Gist
+
+Update to the latest version of the gist:
+
+    %> gist-dep update 732081
+    Downloading latest engine_mixin.rb from gist 732081
+
+If you have more than one file from a gist you can specify which one:
+
+    %> gist-dep update 519630/db_config.rb
+    Downloading latest db_config.rb from gist 519630
+
+If you have more than one file from a gist and you don't specify which
+file it update all files from that gist.
+
+You can also update all gists by just not specifying any gist.
+
+    %> gist-dep update
+    Downloading latest engine_mixin.rb from gist 732081
+    Downloading latest db_config.rb from gist 519630
+
+== Removing a Gist
+
+Basic removal:
+
+    %> gist-dep remove 732081
+    Removing engine_mixin.rb
+
+Remove a specific file when you have more than one from a gist:
+
+    %> gist-dep remove 519630/db_config.rb
+
+If you have more than one file from a gist and you don't specify which
+file it will remove all from that gist.
+
+== Listing Gists
+
+List all installed gists and their installed location:
+
+    %> gist-dep list
+    732081/engine_mixin.rb -> lib/engine_mixin.rb
+    519630/db_config.rb -> app/models/db_config.rb
+    519640/migration.rb -> db/migrations/20130509000000_add_db_config.rb
+
+== Seeing Changes
+
+If you want to see the difference between your copy of a gist file and
+the http://gist.github.com version you can run a diff.
+
+    %> gist-dep diff 732081
+
+If you have more than one file from the same gist you can specify a
+specific file:
+
+    %> gist-dep diff 519630/db_config.rb
+
+If you don't specify a specific file it will show a diff of all files
+on that gist that are installed in your project.
+
+If you want to see a diff on all gists installed on your project you can
+simply run without any arguments.
+
+    %> gist-dep diff
+
+By default the 'diff' program is used to show the differences. But you
+can specify an alternate program via the -d option:
+
+    %> gist-dep diff -d diffuse
+
+== Authenticated Access
+
+Buy authenticating yourself with GitHub you gain three additional
+features:
+
+* Allows you to install your private gists
+* Allows you to push your changes back up to http://gist.github.com
+* The rate limiting functions are less severe ensuring gist-dep doesn't
+  encounter errors when accessing Gists. This is probably not a huge
+  concern unless you are running the tests or doing a lot with gist-dep
+
+To authenticate:
+
+    %> gist-dep login
+    Enter your username: eric1234
+    Enter your password: notmypassword
+    gist-dep is now authenticated
+
+Your username/password will be used to get an OAuth token which will be
+stored at ~/.gist-dep.yml. This file will be set with 600 permissions so
+only your user can read/write. All future interaction with
+http://gist.github.com will be authenticated.
+
+If you want to log GistDep out simply remove the ~/.gist-dep.yml file
+and remove the authorization from GitHub.
+
+== Uploading Gists
+
+If you make updates to a gist and are authenticated you can push your
+changes to http://gist.github.com via:
+
+    %> gist-dep push 732081
+    Uploading engine_mixin.rb to 732081
+
+If you aren't the owner of the gist it will automatically fork the
+gist and push your changes to your fork. Future pushes will push to the
+same fork:
+
+    %> gist-dep push 294896
+    Uploading getHtml.coffee from 294896 to fork at 4063653
+
+= Configuration
+
+The file `gist-dep.yml` is added to your project to manage the list of
+gists installed on your project. You can specify a different location
+for the config file the `-C` options (or `--config`):
+
+    %> gist-dep -C config/gist-dep.yml add 732081
+    Adding engine_mixing.rb from gist 732081
+
+If you decide that you don't want to use gist-dep anymore, simply remove
+the config file and you are back to managing your small code snippets
+manually.
+
+= Testing
+
+The tests require a GitHub account since we do real interactions with
+the Gist API. Also this gets around rate limiting functions that would
+otherwise cause the tests to fail. Your credentials are set by providing
+the environment variables GITHUB_LOGIN and GITHUB_PASSWORD. To make
+this easier you can create a .env file in the root directory to
+have these values automatically given.
+
+Also you should have gist-dep logged in since we use your real token
+login to do some of the tests. If you are not logged in these tests
+are skipped.
+
+After that you can run an individual test with:
+
+    bundle exec ruby test/some_test.rb
+
+If you want to run all unit tests:
+
+    rake test:unit
+
+To run all integration tests:
+
+    rake test:integration
+
+To run all tests:
+
+    rake test
+
+Or just:
+
+    rake
+
+The testing process will create a few authorizations in your GitHub
+account but will clean them up after. It will also create a Gist in
+your GitHub account but will also clean that up after.

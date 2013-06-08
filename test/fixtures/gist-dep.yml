@@ -1,0 +1,11 @@
+---
+files:
+- gist_id: '732081'
+  filename: engine_mixin.rb
+  path: ./engine_mixin.rb
+- gist_id: '519630'
+  filename: db_config.rb
+  path: ./db_config.rb
+- gist_id: '519630'
+  filename: migration.rb
+  path: ./migration.rb
