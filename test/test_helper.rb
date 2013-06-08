@@ -120,15 +120,6 @@ YAML
     end
   end
 
-  # Adjust the given file by removing the first line and adding a line
-  # to the of the file. This is used for testing the unit and
-  # integration diff command
-  def adjust_file filename
-    lines = open(filename).readlines
-    lines.shift; lines.push "\nAppended"
-    open(filename, 'w') {|io| io.write lines.join}
-  end
-
   # Will return a Github client that is fully authenticated
   def auth_client
     @auth_client ||=
@@ -163,12 +154,6 @@ class GistDep::TestCase::Unit < GistDep::TestCase
 end
 
 class GistDep::TestCase::Integration < GistDep::TestCase
-
-  def login
-    input = "#{ENV['GITHUB_LOGIN']}\n#{ENV['GITHUB_PASSWORD']}"
-    response = exec 'login', prefix: %Q{echo "#{input}" | }
-    response.gsub 'stty: standard input: Inappropriate ioctl for device', ''
-  end
 
   # Will run the gist-dep exec with the given arguments in the isolated
   # environment. Can also provide a block to run before the command
