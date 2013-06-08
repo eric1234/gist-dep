@@ -9,6 +9,27 @@ Javascript polyfills, common styles, etc are great examples.
 Anytime you want to re-use code but the amount of code is so small it
 is silly to create a library gist-dep is your answer.
 
+= Installation
+
+First you need a Ruby runtime up and running. You can use gist-dep
+in any language project. But gist-dep is itself written in Ruby and
+installed through Ruby's gem system. So first
+{install Ruby}[http://www.ruby-lang.org/en/downloads/]. I'm a fan
+of {installing via rbenv}[https://github.com/sstephenson/rbenv] but that
+may be too technical for some and a pre-built package may be best if you
+are not technically inclined. Just make sure it is a recent version of
+Ruby (2.0 or 1.9).
+
+Next open up your command line tool and type:
+
+    gem install gist-dep
+
+If you are running rbenv you may need to run the following afterwards:
+
+    rbenv rehash
+
+Now you should be setup to use gist-dep.
+
 = Usage
 
 == Install a New Gist
