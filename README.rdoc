@@ -215,7 +215,7 @@ The testing process will create a few authorizations in your GitHub
 account but will clean them up after. It will also create a Gist in
 your GitHub account but will also clean that up after.
 
-= Organizing your Gems
+= Organizing your Gists
 
 After a while you might build a decent list of code snippets you share
 between projects and developers. While Gist is great at managing a
