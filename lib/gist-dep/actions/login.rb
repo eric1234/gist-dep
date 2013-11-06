@@ -28,7 +28,6 @@ class GistDep::Action::Login < GistDep::Action
       else
         {}
       end
-      config[:login] = login.to_s
       config[:token] = token.to_s
       open(config_file, 'w') do |io|
         File.chmod 0600, io.path

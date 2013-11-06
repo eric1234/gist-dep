@@ -17,7 +17,6 @@ git-dep is now authenticated
 RESPONSE
 
     config = YAML.load_file "#{ENV['HOME']}/.gist-dep.yml"
-    assert_match ENV['GITHUB_LOGIN'], config[:login]
     assert_match /\w{40}/, config[:token]
   end
 

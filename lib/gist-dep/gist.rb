@@ -17,9 +17,8 @@ class GistDep::Gist
   def self.client
     begin
       config_file = "#{ENV['HOME']}/.gist-dep.yml"
-      config = YAML.load_file config_file
-      login, token = config[:login], config[:token]
-      Octokit::Client.new login: login, oauth_token: token
+      token = YAML.load_file(config_file)[:token]
+      Octokit::Client.new access_token: token
     rescue Errno::ENOENT
       if ENV['GITHUB_LOGIN'] && ENV['GITHUB_PASSWORD']
         # This is just for testing so we can avoid rate limiting
