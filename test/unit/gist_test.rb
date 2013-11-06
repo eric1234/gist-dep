@@ -26,7 +26,7 @@ class GistTest < GistDep::TestCase::Unit
   end
 
   def test_url_for
-    expected = 'https://gist.github.com/raw/519630/820766527ff848e187625d17cf62680f853b3be5/db_config.rb'
+    expected = 'https://gist.github.com/eric1234/519630/raw/820766527ff848e187625d17cf62680f853b3be5/db_config.rb'
     assert_equal expected,
       GistDep::Gist.new('519630').url_for('db_config.rb')
     assert_nil GistDep::Gist.new('519630').url_for('fake.rb')
