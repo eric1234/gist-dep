@@ -15,7 +15,7 @@ class GistDep::Action::Push < GistDep::Action::ForEach
     # goal is to re-use code it seems a throwaway gist is not in line
     # with that mission. So force them to login so they can hopefully
     # track it down later
-    raise ArgumentError, 'You must login first' unless client.oauthed?
+    raise ArgumentError, 'You must login first' unless client.token_authenticated?
 
     # To avoid an accidental mass update
     raise ArgumentError, 'gist not specified' unless arguments.first

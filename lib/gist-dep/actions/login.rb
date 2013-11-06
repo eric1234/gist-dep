@@ -10,7 +10,7 @@ class GistDep::Action::Login < GistDep::Action
   DESC
 
   def run
-    if GistDep::Gist.client.oauthed?
+    if GistDep::Gist.client.token_authenticated?
       self.class.io.say "WARNING: Already logged in"
       return
     end
