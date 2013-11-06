@@ -18,7 +18,7 @@ class PushTest < GistDep::TestCase::Unit
         GistDep::Action::Push.new.tap {|a| a.arguments = [gist.id]}.run
         assert_output "hello_world.rb saved to gist #{gist.id}"
         assert_equal 'puts "Ciao Mondo!"',
-          open(auth_client.gist(gist.id).files['hello_world.rb'].raw_url).read
+          open(auth_client.gist(gist.id).files['hello_world.rb'].rels[:raw].href).read
       end
     end
   end
@@ -38,7 +38,7 @@ class PushTest < GistDep::TestCase::Unit
       assert_output /hello_world\.rb fork saved to (\d+) from gist 5614994/
       new_id = @out.string.scan(/saved to (\d+)/).first.first
       assert_equal 'puts "Ciao Mondo!"',
-        open(auth_client.gist(new_id).files['hello_world.rb'].raw_url).read
+        open(auth_client.gist(new_id).files['hello_world.rb'].rels[:raw].href).read
       clear_output
 
       # Save gist again which should update fork
@@ -46,7 +46,7 @@ class PushTest < GistDep::TestCase::Unit
       GistDep::Action::Push.new.tap {|a| a.arguments = ['5614994']}.run
       assert_output "hello_world.rb fork saved to #{new_id} from gist 5614994"
       assert_equal 'puts "Hello World!"',
-        open(auth_client.gist(new_id).files['hello_world.rb'].raw_url).read
+        open(auth_client.gist(new_id).files['hello_world.rb'].rels[:raw].href).read
     end
 
   ensure

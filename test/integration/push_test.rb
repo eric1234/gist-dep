@@ -11,7 +11,7 @@ class PushTest < GistDep::TestCase::Integration
       borrow_auth do
         assert_equal "hello_world.rb saved to gist #{gist.id}", exec("push #{gist.id}")
         assert_equal 'puts "Ciao Mondo!"',
-          open(auth_client.gist(gist.id).files['hello_world.rb'].raw_url).read
+          open(auth_client.gist(gist.id).files['hello_world.rb'].rels[:raw].href).read
       end
     end
   end
@@ -33,9 +33,9 @@ hello_world.rb saved to gist #{gist.id}
 RESPONSE
       end
       assert_equal 'puts "Ciao Mondo!"',
-        open(auth_client.gist(gist.id).files['hello_world.rb'].raw_url).read
+        open(auth_client.gist(gist.id).files['hello_world.rb'].rels[:raw].href).read
       assert_equal 'puts "File uno"',
-        open(auth_client.gist(gist.id).files['1.rb'].raw_url).read
+        open(auth_client.gist(gist.id).files['1.rb'].rels[:raw].href).read
     end
   end
 
@@ -48,12 +48,12 @@ RESPONSE
       assert_match /hello_world\.rb fork saved to (\d+) from gist 5614994/, response
       new_id = response.scan(/saved to (\d+)/).first.first
       assert_equal 'puts "Ciao Mondo!"',
-        open(auth_client.gist(new_id).files['hello_world.rb'].raw_url).read
+        open(auth_client.gist(new_id).files['hello_world.rb'].rels[:raw].href).read
 
       open('hello_world.rb', 'w') {|io| io.write 'puts "Hello World!"'}
       assert_match "hello_world.rb fork saved to #{new_id} from gist 5614994", exec('push 5614994')
       assert_equal 'puts "Hello World!"',
-        open(auth_client.gist(new_id).files['hello_world.rb'].raw_url).read
+        open(auth_client.gist(new_id).files['hello_world.rb'].rels[:raw].href).read
     end
   ensure
     auth_client.delete_gist new_id if new_id

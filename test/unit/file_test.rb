@@ -102,7 +102,7 @@ class GistFileTest < GistDep::TestCase::Unit
       open('hello_world.rb', 'w') {|io| io.write 'puts "Ciao Mondo!"'}
       file.save
       assert_equal 'puts "Ciao Mondo!"',
-        open(auth_client.gist(gist.id).files['hello_world.rb'].raw_url).read
+        open(auth_client.gist(gist.id).files['hello_world.rb'].rels[:raw].href).read
     end
   end
 

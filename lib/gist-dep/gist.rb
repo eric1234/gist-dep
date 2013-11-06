@@ -52,12 +52,13 @@ class GistDep::Gist
 
   # Will get the url to the given file on the gist
   def url_for filename
-    @gist.files[filename].try :raw_url
+    file = @gist.files[filename]
+    file.rels[:raw].href if file
   end
 
   # Returns the name of all non-doc files in the gist
   def filenames
-    @filenames ||= @gist.files.values.collect(&:filename).reject do |filename|
+    @filenames ||= @gist.files.attrs.values.collect(&:filename).reject do |filename|
       ext = File.extname(filename)[1..-1]
       filename == 'README' || doc_extensions.include?(ext)
     end
