@@ -4,6 +4,7 @@ Gem::Specification.new do |s|
   s.homepage = 'http://github.com/eric1234/gist-dep'
   s.author = 'Eric Anderson'
   s.email = 'eric@pixelwareinc.com'
+  s.license = 'Public domain'
   s.executables << 'gist-dep'
   s.add_dependency 'octokit', '~> 2.0'
   s.add_dependency 'faraday', '~> 0.0'
