@@ -2,3 +2,4 @@ pkg
 .env
 .ruby-version
 Gemfile.lock
+.byebug_history
