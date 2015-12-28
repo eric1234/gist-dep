@@ -3,6 +3,8 @@ require File.expand_path '../../../test_helper', __FILE__
 class LoginTest < GistDep::TestCase::Unit
 
   def test_valid_login
+    skip 'Redundent authorizations not longer allowed'
+
     @in << "#{ENV['GITHUB_LOGIN']}\n#{ENV['GITHUB_PASSWORD']}"
     @in.rewind
     GistDep::Action::Login.new.run

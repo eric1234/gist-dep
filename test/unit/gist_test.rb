@@ -21,12 +21,12 @@ class GistTest < GistDep::TestCase::Unit
   def test_filenames
     assert_equal %w(required.coffee),
       GistDep::Gist.new('4237367').filenames
-    assert_equal %w(db_config.rb migration.rb),
+    assert_equal %w(db_config.rb db_config_test.rb migration.rb),
       GistDep::Gist.new('519630').filenames
   end
 
   def test_url_for
-    expected = 'https://gist.github.com/eric1234/519630/raw/820766527ff848e187625d17cf62680f853b3be5/db_config.rb'
+    expected = 'https://gist.githubusercontent.com/eric1234/519630/raw/765f1cf96e81306d42b8c83fca6a952604e8780e/db_config.rb'
     assert_equal expected,
       GistDep::Gist.new('519630').url_for('db_config.rb')
     assert_nil GistDep::Gist.new('519630').url_for('fake.rb')

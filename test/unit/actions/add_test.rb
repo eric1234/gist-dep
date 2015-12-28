@@ -11,7 +11,7 @@ class AddTest < GistDep::TestCase::Unit
 files:
 - gist_id: '732081'
   filename: engine_mixin.rb
-  path: ./engine_mixin.rb
+  path: "./engine_mixin.rb"
 CONFIG
   end
 
@@ -38,7 +38,8 @@ CONFIG
     end
     assert_output <<RESPONSE.chop
 1. db_config.rb
-2. migration.rb
+2. db_config_test.rb
+3. migration.rb
 Please choose the file you wish to import?
 RESPONSE
   end
@@ -49,7 +50,8 @@ RESPONSE
     GistDep::Action::Add.new.tap {|a| a.arguments = ['519630']}.run
     assert_output <<RESPONSE.chop
 1. db_config.rb
-2. migration.rb
+2. db_config_test.rb
+3. migration.rb
 Please choose the file you wish to import?
 Adding db_config.rb from gist 519630
 RESPONSE
@@ -58,12 +60,13 @@ RESPONSE
     @in.truncate @in.rewind
     @out.truncate @out.rewind
 
-    @in << "2\n"
+    @in << "3\n"
     @in.rewind
     GistDep::Action::Add.new.tap {|a| a.arguments = ['519630']}.run
     assert_output <<RESPONSE.chop
 1. db_config.rb
-2. migration.rb
+2. db_config_test.rb
+3. migration.rb
 Please choose the file you wish to import?
 Adding migration.rb from gist 519630
 RESPONSE

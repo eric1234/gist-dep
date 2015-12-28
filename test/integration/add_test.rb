@@ -2,7 +2,7 @@ require File.expand_path '../../test_helper', __FILE__
 
 class AddTest < GistDep::TestCase::Integration
 
-  def test_basic_addition 
+  def test_basic_addition
     assert_equal 'Adding engine_mixin.rb from gist 732081', exec('add 732081')
     assert_file_contents 'Engine.mixin', 'engine_mixin.rb'
     assert_file_contents <<CONFIG, 'gist-dep.yml'
@@ -10,7 +10,7 @@ class AddTest < GistDep::TestCase::Integration
 files:
 - gist_id: '732081'
   filename: engine_mixin.rb
-  path: ./engine_mixin.rb
+  path: "./engine_mixin.rb"
 CONFIG
     assert_equal 'Adding random.coffee from gist 3315166', exec('add 3315166')
     assert_match 'Array.prototype.random', open('random.coffee').read
@@ -44,23 +44,26 @@ CONFIG
     response = exec 'add 519630 < /dev/null'
     assert_equal <<RESPONSE.chop, response
 1. db_config.rb
-2. migration.rb
+2. db_config_test.rb
+3. migration.rb
 Please choose the file you wish to import?
 RESPONSE
 
     response = exec 'add 519630', prefix: 'echo 1 | '
     assert_equal <<RESPONSE.chop, response
 1. db_config.rb
-2. migration.rb
+2. db_config_test.rb
+3. migration.rb
 Please choose the file you wish to import?
 Adding db_config.rb from gist 519630
 RESPONSE
     assert_file_contents 'DbConfig', 'db_config.rb'
 
-    response = exec 'add 519630', prefix: 'echo 2 | '
+    response = exec 'add 519630', prefix: 'echo 3 | '
     assert_equal <<RESPONSE.chop, response
 1. db_config.rb
-2. migration.rb
+2. db_config_test.rb
+3. migration.rb
 Please choose the file you wish to import?
 Adding migration.rb from gist 519630
 RESPONSE

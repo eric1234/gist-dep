@@ -45,8 +45,8 @@ RESPONSE
     open('hello_world.rb', 'w') {|io| io.write 'puts "Ciao Mondo!"'}
     borrow_auth do
       response = exec 'push 5614994'
-      assert_match /hello_world\.rb fork saved to (\d+) from gist 5614994/, response
-      new_id = response.scan(/saved to (\d+)/).first.first
+      assert_match /hello_world\.rb fork saved to (\w+) from gist 5614994/, response
+      new_id = response.scan(/saved to (\w+)/).first.first
       assert_equal 'puts "Ciao Mondo!"',
         open(auth_client.gist(new_id).files['hello_world.rb'].rels[:raw].href).read
 

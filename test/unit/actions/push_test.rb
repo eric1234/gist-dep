@@ -35,8 +35,8 @@ class PushTest < GistDep::TestCase::Unit
 
       # Save gist which should create fork
       GistDep::Action::Push.new.tap {|a| a.arguments = ['5614994']}.run
-      assert_output /hello_world\.rb fork saved to (\d+) from gist 5614994/
-      new_id = @out.string.scan(/saved to (\d+)/).first.first
+      assert_output /hello_world\.rb fork saved to (\w+) from gist 5614994/
+      new_id = @out.string.scan(/saved to (\w+)/).first.first
       assert_equal 'puts "Ciao Mondo!"',
         open(auth_client.gist(new_id).files['hello_world.rb'].rels[:raw].href).read
       clear_output

@@ -9,7 +9,7 @@ Dotenv.load
 $LOAD_PATH << File.expand_path('../../lib', __FILE__)
 require 'gist-dep'
 
-class GistDep::TestCase < Minitest::Unit::TestCase
+class GistDep::TestCase < Minitest::Test
 
   # We need to isolate each test to avoid the tests interacting with
   # the user's current directory and real credentials (unless we
