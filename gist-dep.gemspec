@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'faraday_middleware', '~> 0.0'
   s.add_dependency 'gli', '~> 2.0'
   s.add_dependency 'highline', '~> 1.0'
-  s.add_dependency 'activesupport', '~> 4.0'
+  s.add_dependency 'activesupport', '>= 3.0'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'byebug'
   s.add_development_dependency 'pry-byebug'
